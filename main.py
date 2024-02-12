@@ -31,6 +31,15 @@ time.sleep(2)
 len_menu = driver.find_element(By.XPATH,"//li[@class='ph-8']").text.split(' ')[1]
 
 for i in range(int(len_menu)):
+    index = i+1
+    if(index>1):
+        driver.get('https://www.idx.co.id/id/berita/pengumuman')
+        # next page
+        next_button = driver.find_element(By.XPATH,"//select[@class='form-input']")
+        next_button.click()
+        pyautogui.typewrite(f'{index}')
+        pyautogui.press('enter')
+        time.sleep(1)
     
     div_elements = driver.find_elements(By.CSS_SELECTOR, 'div.attach-card')
     time.sleep(1)
@@ -66,6 +75,11 @@ for i in range(int(len_menu)):
 
         # Use PyAutoGUI to handle the save dialog
         pyautogui.press('enter')
+        time.sleep(1)
+        pyautogui.press('enter')
+        time.sleep(1)
+        pyautogui.press('enter')
+        time.sleep(1)
         source_file = f'/Users/rohmatdasuki/Downloads/{fileName}'
         destination_folder = './file'
         new_filename = f"{menu['name']}.pdf"
@@ -75,10 +89,6 @@ for i in range(int(len_menu)):
         driver.switch_to.window(initial_window_handle)
         print(driver.current_url)
         time.sleep(1)
-    # next page
-    next_button = driver.find_element(By.XPATH,"//button[@class='btn-arrow --next']")
-    next_button.click()
-    time.sleep(1)
     handles = driver.window_handles
     for handle in handles[1:]:
         driver.switch_to.window(handle)
